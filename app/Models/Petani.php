@@ -12,7 +12,7 @@ class Petani extends Model
     protected $table = 'petani';
     protected $primaryKey = 'ID_Petani';
 
-    protected $fillable = ['Nama_Petani', 'Alamat', 'No_Hp', 'Email'];
+    protected $fillable = ['Nama_Petani', 'Alamat', 'No_Hp', 'Email', 'Gambar'];
 
     public function produk()
     {

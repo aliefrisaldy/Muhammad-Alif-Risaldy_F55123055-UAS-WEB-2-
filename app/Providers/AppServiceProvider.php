@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Gate;
+use App\Models\User;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +22,21 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Gate::define('view-dashboard', function (User $user) {
+            return $user->role === 'admin';
+        });
+        Gate::define('manage-products', function (User $user) {
+            return $user->role === 'admin';
+        });
+
+        // Gate for KategoriController
+        Gate::define('manage-categories', function (User $user) {
+            return $user->role === 'admin';
+        });
+
+        // Gate for PetaniController
+        Gate::define('manage-farmers', function (User $user) {
+            return $user->role === 'admin';
+        });
     }
 }

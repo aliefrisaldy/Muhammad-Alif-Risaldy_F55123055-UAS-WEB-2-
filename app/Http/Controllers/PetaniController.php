@@ -1,14 +1,23 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Petani;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 
 class PetaniController extends Controller
 {
+    public function __construct()
+    {
+    $this->middleware('can:manage-farmers');
+    }
+
     public function index()
     {
-        $petani = Petani::all();
+        // Load relation produk to count products per farmer
+        $petani = Petani::withCount('produk')->get();
         return view('petani.index', compact('petani'));
     }
 
@@ -24,11 +33,19 @@ class PetaniController extends Controller
             'Alamat' => 'required|string',
             'No_Hp' => 'required|string|max:20',
             'Email' => 'required|email|max:255',
+            'Gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', 
         ]);
 
-        Petani::create($request->all());
+        $data = $request->only(['Nama_Petani', 'Alamat', 'No_Hp', 'Email']);
 
-        return redirect()->route('petani.index')->with('success', 'Sukses Menambahkan Data Petani');
+        if ($request->hasFile('Gambar')) {
+            $gambarPath = $request->file('Gambar')->store('petani_images', 'public');
+            $data['Gambar'] = $gambarPath;
+        }
+
+        Petani::create($data);
+
+        return redirect()->route('petani.index')->with('success', 'Successfully added farmer data');
     }
 
     public function edit($id)
@@ -44,23 +61,54 @@ class PetaniController extends Controller
             'Alamat' => 'required|string',
             'No_Hp' => 'required|string|max:20',
             'Email' => 'required|email|max:255',
+            'Gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $petani = Petani::findOrFail($id);
-        $petani->update($request->all());
+        $data = $request->only(['Nama_Petani', 'Alamat', 'No_Hp', 'Email']);
 
-        return redirect()->route('petani.index')->with('success', 'Sukses Memperbarui Data Petani');
+        if ($request->hasFile('Gambar')) {
+            // Delete old image if exists
+            if ($petani->Gambar && Storage::disk('public')->exists($petani->Gambar)) {
+                Storage::disk('public')->delete($petani->Gambar);
+            }
+
+            // Save new image
+            $gambarPath = $request->file('Gambar')->store('petani_images', 'public');
+            $data['Gambar'] = $gambarPath;
+        }
+
+        $petani->update($data);
+
+        return redirect()->route('petani.index')->with('success', 'Successfully updated farmer data');
     }
+
     public function show($id)
     {
-        $petani = Petani::findOrFail($id);
-        return view('petani.detail', compact('petani'));
+        // Load farmer with related products and calculate stats
+        $petani = Petani::with(['produk' => function($query) {
+            $query->orderBy('created_at', 'desc');
+        }])->findOrFail($id);
+        
+        // Calculate statistics
+        $totalProduk = $petani->produk->count();
+        $totalPenjualan = $petani->produk->sum('Harga') ?? 0; // Adjust with your field
+        $ratingRata = 5.0; // Placeholder, adjust according to your rating system
+        
+        return view('petani.detail', compact('petani', 'totalProduk', 'totalPenjualan', 'ratingRata'));
     }
+
     public function destroy($id)
     {
         $petani = Petani::findOrFail($id);
+
+        // Delete image from storage if exists
+        if ($petani->Gambar && Storage::disk('public')->exists($petani->Gambar)) {
+            Storage::disk('public')->delete($petani->Gambar);
+        }
+
         $petani->delete();
 
-        return redirect()->route('petani.index')->with('success', 'Sukses Menghapus Data Petani');
+        return redirect()->route('petani.index')->with('success', 'Successfully deleted farmer data');
     }
 }

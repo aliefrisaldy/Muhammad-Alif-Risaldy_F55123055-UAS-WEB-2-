@@ -1,60 +1,168 @@
 @extends('components.default_layout')
 
-@section('title', 'Kategori')
-@section('header', 'Kategori')
+@section('title', 'Category Data')
+@section('header', 'Category Data')
+@section('description', 'Manage FarmFresh product categories')
 
 @section('content')
-@include('components.nontifikasi')
-<div class="flex justify-between items-center mb-6">
-    <h2 class="text-xl font-bold text-white">Daftar Kategori</h2>
-    <a href="{{ route('kategori.create') }}" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded shadow">
-        + Tambah Kategori
-    </a>
-</div>
+<div class="space-y-6">
+    <!-- Header Actions -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+        <div>
+            <h2 class="text-xl font-semibold text-gray-900">Category List</h2>
+            <p class="mt-1 text-sm text-gray-600">Total: {{ $kategori->count() }} categories available</p>
+        </div>
+        <div class="mt-4 sm:mt-0">
+            <a href="{{ route('kategori.create') }}" 
+               class="inline-flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-colors duration-200">
+                <i class="fas fa-plus mr-2"></i>
+                Add Category
+            </a>
+        </div>
+    </div>
 
-<div class="bg-gray-800 rounded-lg shadow overflow-x-auto">
-    <table class="min-w-full table-auto text-center text-gray-300">
-        <thead class="bg-gray-700">
-            <tr>
-                <th class="px-4 py-2 text-gray-200">Nama Kategori</th>
-                <th class="px-4 py-2 text-gray-200">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($kategori as $kategori)
-                <tr class="border-t border-gray-600">
-                    <td class="px-4 py-2">{{ $kategori->Nama_Kategori }}</td>
-                    <td class="px-4 py-2">
-                        <div class="flex justify-center items-center space-x-2">
-                            <!-- Detail button -->
-                            <a href="{{ route('kategori.show', $kategori->ID_Kategori) }}" class="bg-white rounded-full p-2 hover:bg-gray-200">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="w-4 h-4 text-green-500 hover:text-green-600">
-                                    <path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z"/>
-                                </svg>
-                            </a>
+    <!-- Stats Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div class="bg-white rounded-lg shadow p-6">
+            <div class="flex items-center">
+                <div class="p-2 bg-green-100 rounded-lg">
+                    <i class="fas fa-tags text-green-600 text-xl"></i>
+                </div>
+                <div class="ml-4">
+                    <p class="text-sm font-medium text-gray-600">Total Categories</p>
+                    <p class="text-2xl font-bold text-gray-900">{{ $kategori->count() }}</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow p-6">
+            <div class="flex items-center">
+                <div class="p-2 bg-blue-100 rounded-lg">
+                    <i class="fas fa-box text-blue-600 text-xl"></i>
+                </div>
+                <div class="ml-4">
+                    <p class="text-sm font-medium text-gray-600">Total Products</p>
+                    <p class="text-2xl font-bold text-gray-900">{{ $kategori->sum('produk_count') }}</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow p-6">
+            <div class="flex items-center">
+                <div class="p-2 bg-orange-100 rounded-lg">
+                    <i class="fas fa-chart-bar text-orange-600 text-xl"></i>
+                </div>
+                <div class="ml-4">
+                    <p class="text-sm font-medium text-gray-600">Active Categories</p>
+                    <p class="text-2xl font-bold text-gray-900">{{ $kategori->where('produk_count', '>', 0)->count() }}</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow p-6">
+            <div class="flex items-center">
+                <div class="p-2 bg-purple-100 rounded-lg">
+                    <i class="fas fa-archive text-purple-600 text-xl"></i>
+                </div>
+                <div class="ml-4">
+                    <p class="text-sm font-medium text-gray-600">Empty Categories</p>
+                    <p class="text-2xl font-bold text-gray-900">{{ $kategori->where('produk_count', 0)->count() }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                            <!-- Edit button -->
-                            <a href="{{ route('kategori.edit', $kategori->ID_Kategori) }}" class="bg-white rounded-full p-2 hover:bg-gray-200">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-4 h-4 text-blue-500 hover:text-blue-600">
-                                    <path d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160L0 416c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-96c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 96c0 17.7-14.3 32-32 32L96 448c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 64z"/>
-                                </svg>
-                            </a>
-
-                            <!-- Delete button -->
-                            <form action="{{ route('kategori.destroy', $kategori->ID_Kategori) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="bg-white rounded-full p-2 hover:bg-gray-200">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-4 h-4 text-red-500 hover:text-red-600">
-                                        <path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z"/>
-                                    </svg>
-                                </button>
-                            </form>
-                        </div>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+    <!-- Category Table -->
+    <div class="bg-white rounded-lg shadow overflow-hidden">
+        <div class="px-6 py-4 border-b border-gray-200">
+            <h3 class="text-lg font-medium text-gray-900">Category List</h3>
+        </div>
+        
+        @if($kategori->count() > 0)
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">No</th>
+                            <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Category Name</th>
+                            <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Product Count</th>
+                            <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                            <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Created</th>
+                            <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        @foreach($kategori as $index => $item)
+                            <tr class="hover:bg-gray-50">
+                                <td class="text-center px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $index + 1 }}</td>
+                                <td class="text-center px-6 py-4 whitespace-nowrap">
+                                    <div class="text-center text-sm font-medium text-gray-900">{{ $item->Nama_Kategori }}</div>
+                                </td>
+                                <td class="text-center px-6 py-4 whitespace-nowrap">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $item->produk_count > 0 ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-800' }}">
+                                        {{ $item->produk_count }} products
+                                    </span>
+                                </td>
+                                <td class="text-center px-6 py-4 whitespace-nowrap">
+                                    @if($item->produk_count > 0)
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                            <i class="fas fa-check-circle mr-1"></i>
+                                            Active
+                                        </span>
+                                    @else
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                            <i class="fas fa-exclamation-circle mr-1"></i>
+                                            Empty
+                                        </span>
+                                    @endif
+                                </td>
+                                <td class="text-center px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    {{ $item->created_at->format('d M Y') }}
+                                </td>
+                                <td class="text-center px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                    <div class="justify-center flex items-center space-x-2">
+                                        <a href="{{ route('kategori.show', $item->ID_Kategori) }}" 
+                                           class="text-blue-600 hover:text-blue-900 p-1 rounded" title="Details">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a href="{{ route('kategori.edit', $item->ID_Kategori) }}" 
+                                           class="text-yellow-600 hover:text-yellow-900 p-1 rounded" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <form action="{{ route('kategori.destroy', $item->ID_Kategori) }}" 
+                                              method="POST" 
+                                              class="inline"
+                                              onsubmit="return confirm('Are you sure you want to delete this category?{{ $item->produk_count > 0 ? ' This category contains ' . $item->produk_count . ' products.' : '' }}')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" 
+                                                    class="text-red-600 hover:text-red-900 p-1 rounded {{ $item->produk_count > 0 ? 'opacity-50 cursor-not-allowed' : '' }}" 
+                                                    title="{{ $item->produk_count > 0 ? 'Cannot delete (still in use)' : 'Delete' }}"
+                                                    {{ $item->produk_count > 0 ? 'disabled' : '' }}>
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        @else
+            <div class="text-center py-12">
+                <div class="inline-flex items-center justify-center w-16 h-16 bg-gray-100 rounded-full mb-4">
+                    <i class="fas fa-tags text-gray-400 text-2xl"></i>
+                </div>
+                <h3 class="text-lg font-medium text-gray-900 mb-2">No categories yet</h3>
+                <p class="text-gray-600 mb-4">Start adding categories to organize your products</p>
+                <a href="{{ route('kategori.create') }}" 
+                   class="inline-flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg">
+                    <i class="fas fa-plus mr-2"></i>
+                    Add First Category
+                </a>
+            </div>
+        @endif
+    </div>
 </div>
 @endsection
