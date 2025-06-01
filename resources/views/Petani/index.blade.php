@@ -97,11 +97,13 @@
                         @foreach($petani as $index => $item)
                             <tr class="hover:bg-gray-50">
                                 <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-gray-900">{{ $index + 1 }}</td>
-                                <td class=" text-center px-6 py-4 whitespace-nowrap">
+                                <td class=" text-center align-middle px-6 py-4 whitespace-nowrap">
                                     @if($item->Gambar && Storage::disk('public')->exists($item->Gambar))
-                                        <img src="{{ asset('storage/' . $item->Gambar) }}" 
-                                             alt="{{ $item->Nama_Petani }}" 
-                                             class="w-12 h-12 rounded-full object-cover">
+                                        <div class="flex justify-center items-center">
+                                            <img src="{{ asset('storage/' . $item->Gambar) }}" 
+                                                alt="{{ $item->Nama_Petani }}" 
+                                                class="w-12 h-12 rounded-full object-cover">
+                                        </div>  
                                     @else
                                         <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center">
                                             <i class="fas fa-user text-gray-500"></i>
@@ -121,8 +123,8 @@
                                         {{ $item->produk_count }} Products
                                     </span>
                                 </td>
-                                <td class="text-center px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    <div class="flex items-center space-x-2">
+                                <td class="text-center align-middle px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                    <div class="flex justify-center items-center space-x-2">
                                         <a href="{{ route('petani.show', $item->ID_Petani) }}" 
                                            class="text-blue-600 hover:text-blue-900 p-1 rounded" title="View">
                                             <i class="fas fa-eye"></i>
