@@ -113,9 +113,9 @@ class AuthController extends Controller
             $user = Auth::user();
 
             if ($user->role === 'admin') {
-                return redirect()->intended('/dashboard')->with('success');
+                return redirect('/dashboard')->with('success');
             } elseif ($user->role === 'guest') {
-                return redirect()->intended('/home')->with('success');}
+                return redirect('/home')->with('success');}
         }
 
         // Authentication failed

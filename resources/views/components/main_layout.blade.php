@@ -158,120 +158,126 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-green-500 text-white mt-10">
-        <div class="container mx-auto py-10 px-5">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Get In Touch -->
-                <div class="space-y-5">
-                    <h4 class="text-xl font-semibold">Get In Touch</h4>
-                    <div class="flex items-center space-x-3">
-                        <i class="fa-solid fa-location-dot"></i>
-                        <p class="m-0">Universitas Tadulako, Palu, Indonesia</p>
-                    </div>
-                    <div class="flex items-center space-x-3">
-                        <i class="fa-solid fa-envelope"></i>
-                        <p class="m-0">FarmFresh@gmail.com</p>
-                    </div>
-                    <div class="flex items-center space-x-3">
-                        <i class="fa-solid fa-phone"></i>
-                        <p class="m-0">+62-822-5970-9369</p>
-                    </div>
-                    <div class="flex space-x-3 mt-4">
-                        <a
-                            class="bg-orange-500 text-white rounded-full p-3 hover:bg-orange-600 transition-colors"
-                            href="https://twitter.com"
-                        ><i class="fab fa-twitter"></i></a>
-                        <a
-                            class="bg-orange-500 text-white rounded-full p-3 hover:bg-orange-600 transition-colors"
-                            href="https://facebook.com"
-                        ><i class="fab fa-facebook-f"></i></a>
-                        <a
-                            class="bg-orange-500 text-white rounded-full p-3 hover:bg-orange-600 transition-colors"
-                            href="https://linkedin.com"
-                        ><i class="fab fa-linkedin-in"></i></a>
-                        <a
-                            class="bg-orange-500 text-white rounded-full p-3 hover:bg-orange-600 transition-colors"
-                            href="https://youtube.com"
-                        ><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-
-                <!-- Quick Links -->
-                <div class="space-y-5">
-                    <h4 class="text-xl font-semibold">Quick Links</h4>
-                    <ul class="space-y-2">
-                        <li>
-                            <a class="text-white flex items-center space-x-2 hover:text-orange-300 transition-colors" href="#">
-                                <i class="fa-solid fa-arrow-right"></i><span>Home</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="text-white flex items-center space-x-2 hover:text-orange-300 transition-colors" href="#">
-                                <i class="fa-solid fa-arrow-right"></i><span>About Us</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="text-white flex items-center space-x-2 hover:text-orange-300 transition-colors" href="#">
-                                <i class="fa-solid fa-arrow-right"></i><span>Our Services</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="text-white flex items-center space-x-2 hover:text-orange-300 transition-colors" href="#">
-                                <i class="fa-solid fa-arrow-right"></i><span>Meet The Team</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="text-white flex items-center space-x-2 hover:text-orange-300 transition-colors" href="#">
-                                <i class="fa-solid fa-arrow-right"></i><span>Latest Blog</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="text-white flex items-center space-x-2 hover:text-orange-300 transition-colors" href="#">
-                                <i class="fa-solid fa-arrow-right"></i><span>Contact Us</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Popular Links -->
-                <div class="space-y-5">
-                    <h4 class="text-xl font-semibold">Popular Links</h4>
-                    <ul class="space-y-2">
-                        <li>
-                            <a class="text-white flex items-center space-x-2 hover:text-orange-300 transition-colors" href="#">
-                                <i class="fa-solid fa-arrow-right"></i><span>Home</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="text-white flex items-center space-x-2 hover:text-orange-300 transition-colors" href="#">
-                                <i class="fa-solid fa-arrow-right"></i><span>About Us</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="text-white flex items-center space-x-2 hover:text-orange-300 transition-colors" href="#">
-                                <i class="fa-solid fa-arrow-right"></i><span>Our Services</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="text-white flex items-center space-x-2 hover:text-orange-300 transition-colors" href="#">
-                                <i class="fa-solid fa-arrow-right"></i><span>Meet The Team</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="text-white flex items-center space-x-2 hover:text-orange-300 transition-colors" href="#">
-                                <i class="fa-solid fa-arrow-right"></i><span>Latest Blog</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="text-white flex items-center space-x-2 hover:text-orange-300 transition-colors" href="#">
-                                <i class="fa-solid fa-arrow-right"></i><span>Contact Us</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+    
+    <div class="bg-green-500 text-white mt-10">
+      <div class="container mx-auto py-10 pl-[150px]">
+        <div class="flex flex-wrap -mx-3">
+          <div class="w-full md:w-1/2 lg:w-1/3 px-3 space-y-5">
+            <h4 class="text-xl font-semibold">Get In Touch</h4>
+            <div class="flex items-center space-x-3">
+              <i class="fa-solid fa-location-dot"></i>
+              <p class="m-0">Universitas Tadulako, Palu, Indonesia</p>
             </div>
+            <div class="flex items-center space-x-3">
+              <i class="fa-solid fa-envelope"></i>
+              <p class="m-0">FarmFresh@gmail.com</p>
+            </div>
+            <div class="flex items-center space-x-3">
+              <i class="fa-solid fa-phone"></i>
+              <p class="m-0">+62-822-5970-9369</p>
+            </div>
+            <div class="flex space-x-3 mt-4">
+              <a
+                class="bg-orange-500 text-white rounded-full p-3"
+                href="https://twitter.com"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a
+                class="bg-orange-500 text-white rounded-full p-3"
+                href="https://facebook.com"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a
+                class="bg-orange-500 text-white rounded-full p-3"
+                href="https://linkedin.com"
+                ><i class="fab fa-linkedin-in"></i
+              ></a>
+              <a
+                class="bg-orange-500 text-white rounded-full p-3"
+                href="https://youtube.com"
+                ><i class="fab fa-youtube"></i
+              ></a>
+            </div>
+          </div>
+
+          <div class="w-full md:w-1/2 lg:w-1/3 px-3 space-y-5">
+            <h4 class="text-xl font-semibold">Quick Links</h4>
+            <ul class="space-y-2">
+              <li>
+                <a class="text-white flex items-center space-x-2" href="#"
+                  ><i class="fa-solid fa-arrow-right"></i><span>Home</span></a
+                >
+              </li>
+              <li>
+                <a class="text-white flex items-center space-x-2" href="#"
+                  ><i class="fa-solid fa-arrow-right"></i><span>About Us</span></a
+                >
+              </li>
+              <li>
+                <a class="text-white flex items-center space-x-2" href="#"
+                  ><i class="fa-solid fa-arrow-right"></i><span>Our Services</span></a
+                >
+              </li>
+              <li>
+                <a class="text-white flex items-center space-x-2" href="#"
+                  ><i class="fa-solid fa-arrow-right"></i><span>Meet The Team</span></a
+                >
+              </li>
+              <li>
+                <a class="text-white flex items-center space-x-2" href="#"
+                  ><i class="fa-solid fa-arrow-right"></i><span>Latest Blog</span></a
+                >
+              </li>
+              <li>
+                <a class="text-white flex items-center space-x-2" href="#"
+                  ><i class="fa-solid fa-arrow-right"></i><span>Contact Us</span></a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="w-full md:w-1/2 lg:w-1/3 px-3 space-y-5">
+            <h4 class="text-xl font-semibold">Popular Links</h4>
+            <ul class="space-y-2">
+              <li>
+                <a class="text-white flex items-center space-x-2" href="#"
+                  ><i class="fa-solid fa-arrow-right"></i><span>Home</span></a
+                >
+              </li>
+              <li>
+                <a class="text-white flex items-center space-x-2" href="#"
+                  ><i class="fa-solid fa-arrow-right"></i></i><span>About Us</span></a
+                >
+              </li>
+              <li>
+                <a class="text-white flex items-center space-x-2" href="#"
+                  ><i class="fa-solid fa-arrow-right"></i><span>Our Services</span></a
+                >
+              </li>
+              <li>
+                <a class="text-white flex items-center space-x-2" href="#"
+                  ><i class="fa-solid fa-arrow-right"></i></i
+                  ><span>Meet The Team</span></a
+                >
+              </li>
+              <li>
+                <a class="text-white flex items-center space-x-2" href="#"
+                  ><i class="fa-solid fa-arrow-right"></i><span>Latest Blog</span></a
+                >
+              </li>
+              <li>
+                <a class="text-white flex items-center space-x-2" href="#"
+                  ><i class="fa-solid fa-arrow-right"></i></i><span>Contact Us</span></a
+                >
+              </li>
+            </ul>
+          </div>
         </div>
-    </footer>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
 
     <!-- Copyright -->
     <div class="bg-orange-500 text-white py-4">
