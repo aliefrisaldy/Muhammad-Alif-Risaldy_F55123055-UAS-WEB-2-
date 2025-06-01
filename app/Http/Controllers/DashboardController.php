@@ -62,12 +62,13 @@ class DashboardController extends Controller
             ->get();
 
         // Monthly product additions (last 6 months)
-        $monthlyData = Produk::selectRaw('MONTH(created_at) as month, YEAR(created_at) as year, COUNT(*) as count')
+        $monthlyData = Produk::selectRaw("strftime('%Y', created_at) as year, strftime('%m', created_at) as month, COUNT(*) as count")
             ->where('created_at', '>=', now()->subMonths(6))
             ->groupBy('year', 'month')
             ->orderBy('year', 'desc')
             ->orderBy('month', 'desc')
             ->get();
+
 
         return view('dashboard.index', compact(
             'produkCount', 
