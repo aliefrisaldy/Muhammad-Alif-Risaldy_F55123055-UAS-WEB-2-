@@ -135,8 +135,8 @@
                                 </span>
                             @endif
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                            <div class="flex items-center space-x-2">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-center align-middle">
+                            <div class="flex justify-center items-center space-x-2">
                                 <a href="{{ route('produk.show', $produk->ID_Produk) }}" 
                                    class="text-blue-600 hover:text-blue-900 p-1 rounded transition-colors"
                                    title="View Details">
