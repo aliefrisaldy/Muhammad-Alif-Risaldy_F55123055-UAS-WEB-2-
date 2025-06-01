@@ -55,7 +55,7 @@ class DashboardController extends Controller
             ->get();
 
         // Top categories by product count
-            $topCategories = Kategori::withCount('produk')
+        $topCategories = Kategori::withCount('produk')
             ->whereHas('produk') // Hanya ambil kategori yang punya produk
             ->orderBy('produk_count', 'desc')
             ->limit(5)
