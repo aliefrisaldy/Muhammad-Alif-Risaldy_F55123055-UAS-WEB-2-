@@ -25,9 +25,6 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
 
 Route::middleware('auth')->group(function () { 
-    Route::get('/', function () {
-        return redirect()->route('dashboard.index');
-    })->name('dashboard.index');
     Route::resource('produk', ProductController::class);
     Route::resource('kategori', KategoriController::class);
     Route::resource('petani', PetaniController::class);
