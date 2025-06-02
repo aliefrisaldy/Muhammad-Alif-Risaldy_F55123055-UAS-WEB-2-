@@ -16,7 +16,9 @@ use App\Http\Controllers\FarmerController;
 
 
 
-
+Route::get('/', function () {
+    return redirect()->route('auth.login'); 
+});
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('auth.register');
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('auth.login');
 Route::post('/register', [AuthController::class, 'register'])->name('auth.store');
